@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crave Corner | Food, made fun</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --ink: #24212b;
+      --muted: #77717d;
+      --orange: #ff7043;
+      --yellow: #ffd166;
+      --cream: #fffaf3;
+      --pink: #ffe5dc;
+      --white: #ffffff;
+      --line: #eee6df;
+      --green: #2e8b67;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--cream);
+      line-height: 1.5;
+    }
+
+    button, input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .top-strip {
+      background: var(--ink);
+      color: #fff;
+      text-align: center;
+      padding: 9px 16px;
+      font-size: 13px;
+      letter-spacing: .2px;
+    }
+
+    header {
+      background: rgba(255, 250, 243, .96);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav-wrap {
+      max-width: 1180px;
+      margin: auto;
+      padding: 17px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      font-size: 23px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      white-space: nowrap;
+    }
+
+    .brand span {
+      color: var(--orange);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 27px;
+    }
+
+    nav a {
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      color: var(--orange);
+    }
+
+    .cart-button {
+      border: 0;
+      background: var(--ink);
+      color: white;
+      padding: 11px 17px;
+      border-radius: 12px;
+      font-weight: 700;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .cart-count {
+      display: inline-grid;
+      place-items: center;
+      min-width: 22px;
+      height: 22px;
+      padding: 0 5px;
+      border-radius: 7px;
+      background: var(--yellow);
+      color: var(--ink);
+      font-size: 12px;
+    }
+
+    .hero {
+      max-width: 1180px;
+      margin: 30px auto 0;
+      padding: 0 24px;
+    }
+
+    .hero-panel {
+      min-height: 385px;
+      border-radius: 28px;
+      background: var(--pink);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      position: relative;
+    }
+
+    .hero-copy {
+      padding: 58px 0 54px 58px;
+      align-self: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      color: var(--orange);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.04;
+      letter-spacing: -2.5px;
+      max-width: 520px;
+    }
+
+    .hero-copy p {
+      color: #625760;
+      max-width: 440px;
+      margin: 18px 0 26px;
+      font-size: 16px;
+    }
+
+    .primary-button {
+      border: 0;
+      border-radius: 12px;
+      background: var(--orange);
+      color: white;
+      font-weight: 800;
+      padding: 14px 22px;
+      box-shadow: 0 8px 0 #e85e35;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+
+    .primary-button:hover {
+      transform: translateY(2px);
+      box-shadow: 0 6px 0 #e85e35;
+    }
+
+    .hero-art {
+      position: relative;
+      min-height: 330px;
+      display: grid;
+      place-items: center;
+    }
+
+    .plate {
+      width: 290px;
+      height: 290px;
+      border-radius: 50%;
+      background: #fff;
+      border: 14px solid #f7d8ca;
+      box-shadow: 0 20px 40px rgba(88, 49, 35, .12);
+      display: grid;
+      place-items: center;
+      transform: rotate(-8deg);
+      position: relative;
+    }
+
+    .plate-inner {
+      width: 225px;
+      height: 225px;
+      border-radius: 50%;
+      background: #f9c96d;
+      border: 8px solid #ffe8b0;
+      display: grid;
+      place-items: center;
+      font-size: 100px;
+      position: relative;
+    }
+
+    .plate-inner::before,
+    .plate-inner::after {
+      content: "";
+      position: absolute;
+      background: #4e9a58;
+      width: 17px;
+      height: 54px;
+      border-radius: 50%;
+      transform: rotate(35deg);
+      top: 25px;
+      left: 45px;
+    }
+
+    .plate-inner::after {
+      top: auto;
+      left: auto;
+      right: 40px;
+      bottom: 22px;
+      transform: rotate(-35deg);
+    }
+
+    .floating-tag {
+      position: absolute;
+      background: var(--yellow);
+      padding: 11px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 800;
+      box-shadow: 0 8px 18px rgba(66, 43, 20, .12);
+      transform: rotate(5deg);
+      right: 20px;
+      bottom: 44px;
+    }
+
+    .decor-dot {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--orange);
+      opacity: .75;
+    }
+
+    .dot-one {
+      width: 18px;
+      height: 18px;
+      top: 42px;
+      right: 72px;
+    }
+
+    .dot-two {
+      width: 12px;
+      height: 12px;
+      left: 40px;
+      bottom: 50px;
+      background: #a58be7;
+    }
+
+    .benefits {
+      max-width: 1180px;
+      margin: 24px auto 0;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .benefit {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 17px 20px;
+    }
+
+    .benefit strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 3px;
+    }
+
+    .benefit span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .menu-section {
+      max-width: 1180px;
+      margin: 65px auto 0;
+      padding: 0 24px 70px;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 25px;
+    }
+
+    .section-heading h2 {
+      font-size: 34px;
+      letter-spacing: -1.4px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      margin-top: 5px;
+    }
+
+    .search-box {
+      border: 1px solid var(--line);
+      background: white;
+      border-radius: 12px;
+      padding: 12px 15px;
+      width: 235px;
+      outline: none;
+    }
+
+    .search-box:focus {
+      border-color: var(--orange);
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .filter-btn {
+      border: 1px solid #e8ded6;
+      background: white;
+      color: var(--ink);
+      padding: 9px 17px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 700;
+      transition: background .15s ease, color .15s ease;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--ink);
+      color: white;
+      border-color: var(--ink);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .food-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .food-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 28px rgba(54, 39, 30, .08);
+    }
+
+    .food-visual {
+      height: 155px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+      font-size: 70px;
+    }
+
+    .food-visual::before {
+      content: "";
+      width: 145px;
+      height: 145px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.5);
+      position: absolute;
+    }
+
+    .food-visual span {
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 8px 5px rgba(65, 39, 23, .12));
+    }
+
+    .visual-peach { background: #ffe1d4; }
+    .visual-yellow { background: #ffedb4; }
+    .visual-green { background: #dcebd4; }
+    .visual-purple { background: #e8defb; }
+    .visual-blue { background: #dceaf8; }
+    .visual-pink { background: #f9dce6; }
+
+    .food-info {
+      padding: 15px;
+    }
+
+    .food-info h3 {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .food-info p {
+      color: var(--muted);
+      font-size: 12px;
+      min-height: 36px;
+    }
+
+    .food-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 14px;
+      gap: 10px;
+    }
+
+    .price {
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .add-btn {
+      border: 0;
+      background: var(--pink);
+      color: #b94c2e;
+      border-radius: 10px;
+      padding: 9px 12px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .add-btn:hover {
+      background: var(--orange);
+      color: white;
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      color: var(--muted);
+      padding: 35px;
+      background: white;
+      border-radius: 16px;
+    }
+
+    .offer-section {
+      max-width: 1180px;
+      margin: 0 auto 70px;
+      padding: 0 24px;
+    }
+
+    .offer-card {
+      background: var(--yellow);
+      border-radius: 22px;
+      padding: 30px 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .offer-card h2 {
+      font-size: 28px;
+      letter-spacing: -1px;
+    }
+
+    .offer-card p {
+      margin-top: 6px;
+      color: #64522b;
+    }
+
+    .offer-code {
+      background: white;
+      border: 2px dashed #c79b36;
+      padding: 13px 18px;
+      border-radius: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .reviews {
+      max-width: 1180px;
+      margin: 0 auto 70px;
+      padding: 0 24px;
+    }
+
+    .reviews h2 {
+      font-size: 30px;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .review {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px;
+    }
+
+    .review .stars {
+      color: #e7a323;
+      letter-spacing: 2px;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .review p {
+      font-size: 14px;
+      color: #5f5964;
+      margin-bottom: 15px;
+    }
+
+    .review strong {
+      font-size: 13px;
+    }
+
+    footer {
+      background: var(--ink);
+      color: white;
+      padding: 34px 24px;
+    }
+
+    .footer-inner {
+      max-width: 1180px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+
+    footer p {
+      color: #c9c3cd;
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    .footer-note {
+      align-self: end;
+      font-size: 12px;
+      color: #c9c3cd;
+    }
+
+    .cart-panel {
+      position: fixed;
+      top: 0;
+      right: -420px;
+      width: min(390px, 100%);
+      height: 100vh;
+      background: white;
+      z-index: 30;
+      box-shadow: -15px 0 40px rgba(20, 15, 25, .15);
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      transition: right .25s ease;
+    }
+
+    .cart-panel.open {
+      right: 0;
+    }
+
+    .cart-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 17px;
+    }
+
+    .cart-head h2 {
+      font-size: 22px;
+    }
+
+    .close-cart {
+      border: 0;
+      background: #f5f1ed;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      font-size: 20px;
+    }
+
+    .cart-items {
+      overflow-y: auto;
+      flex: 1;
+      padding: 15px 0;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid #f1ebe6;
+    }
+
+    .cart-item-name {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .cart-item-sub {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 3px;
+    }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 7px;
+    }
+
+    .quantity-controls button {
+      border: 1px solid var(--line);
+      background: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 7px;
+      font-weight: 700;
+    }
+
+    .cart-total {
+      border-top: 1px solid var(--line);
+      padding-top: 17px;
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 800;
+      font-size: 18px;
+      margin-bottom: 14px;
+    }
+
+    .checkout-button {
+      width: 100%;
+      border: 0;
+      background: var(--orange);
+      color: white;
+      border-radius: 12px;
+      padding: 14px;
+      font-weight: 800;
+    }
+
+    .checkout-message {
+      font-size: 12px;
+      color: var(--green);
+      margin-top: 10px;
+      text-align: center;
+      min-height: 18px;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(30, 23, 33, .35);
+      z-index: 20;
+      display: none;
+    }
+
+    .overlay.show {
+      display: block;
+    }
+
+    @media (max-width: 900px) {
+      .hero-panel {
+        grid-template-columns: 1fr .8fr;
+      }
+
+      .hero-copy {
+        padding-left: 35px;
+      }
+
+      .plate {
+        width: 230px;
+        height: 230px;
+      }
+
+      .plate-inner {
+        width: 180px;
+        height: 180px;
+        font-size: 78px;
+      }
+
+      .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 650px) {
+      .nav-wrap {
+        padding: 14px 18px;
+        flex-wrap: wrap;
+      }
+
+      nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .hero {
+        margin-top: 18px;
+        padding: 0 15px;
+      }
+
+      .hero-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        padding: 34px 26px 10px;
+      }
+
+      .hero-art {
+        min-height: 260px;
+      }
+
+      .plate {
+        width: 215px;
+        height: 215px;
+      }
+
+      .plate-inner {
+        width: 165px;
+        height: 165px;
+        font-size: 72px;
+      }
+
+      .floating-tag {
+        right: 15px;
+        bottom: 20px;
+      }
+
+      .benefits {
+        grid-template-columns: 1fr;
+        padding: 0 15px;
+      }
+
+      .menu-section {
+        margin-top: 45px;
+        padding: 0 15px 55px;
+      }
+
+      .section-heading {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .search-box {
+        width: 100%;
+      }
+
+      .menu-grid {
+        gap: 12px;
+      }
+
+      .food-visual {
+        height: 125px;
+        font-size: 58px;
+      }
+
+      .food-info {
+        padding: 12px;
+      }
+
+      .food-info h3 {
+        font-size: 14px;
+      }
+
+      .food-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .add-btn {
+        width: 100%;
+      }
+
+      .offer-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 25px;
+      }
+
+      .review-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .reviews {
+        margin-bottom: 50px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-strip">Fresh picks, happy bites — delivery made easy</div>
+
+  <header>
+    <div class="nav-wrap">
+      <div class="brand">Crave<span>Corner.</span></div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#menu">Menu</a>
+        <a href="#offers">Offers</a>
+        <a href="#reviews">Reviews</a>
+      </nav>
+      <button class="cart-button" id="openCart">Your Cart <span class="cart-count" id="cartCount">0</span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-panel">
+        <div class="hero-copy">
+          <div class="eyebrow">Good food, good mood</div>
+          <h1>Your cravings called. We answered.</h1>
+          <p>From cheesy classics to sweet little treats, find your next favourite bite at Crave Corner.</p>
+          <button class="primary-button" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">Explore the menu</button>
+        </div>
+        <div class="hero-art">
+          <div class="decor-dot dot-one"></div>
+          <div class="decor-dot dot-two"></div>
+          <div class="plate">
+            <div class="plate-inner">P</div>
+          </div>
+          <div class="floating-tag">Made for your cravings</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="benefits" aria-label="Why choose Crave Corner">
+      <div class="benefit">
+        <strong>Freshly prepared</strong>
+        <span>Made fresh when you order</span>
+      </div>
+      <div class="benefit">
+        <strong>Quick delivery</strong>
+        <span>Good food, right on time</span>
+      </div>
+      <div class="benefit">
+        <strong>Easy ordering</strong>
+        <span>Pick, add, and enjoy</span>
+      </div>
+    </section>
+
+    <section class="menu-section" id="menu">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">The good stuff</div>
+          <h2>Find your favourite</h2>
+          <p>Simple choices. Big flavour.</p>
+        </div>
+        <input class="search-box" id="searchInput" type="search" placeholder="Search the menu..." aria-label="Search the menu">
+      </div>
+
+      <div class="filters" id="filters">
+        <button class="filter-btn active" data-category="All">All items</button>
+        <button class="filter-btn" data-category="Burgers">Burgers</button>
+        <button class="filter-btn" data-category="Pizza">Pizza</button>
+        <button class="filter-btn" data-category="Sides">Sides</button>
+        <button class="filter-btn" data-category="Desserts">Desserts</button>
+        <button class="filter-btn" data-category="Drinks">Drinks</button>
+      </div>
+
+      <div class="menu-grid" id="menuGrid"></div>
+    </section>
+
+    <section class="offer-section" id="offers">
+      <div class="offer-card">
+        <div>
+          <div class="eyebrow">A little something extra</div>
+          <h2>First order? Make it a deal.</h2>
+          <p>Get 15% off your first order above ₹299. A good excuse to try something new.</p>
+        </div>
+        <div class="offer-code">Use code: FIRST15</div>
+      </div>
+    </section>
+
+    <section class="reviews" id="reviews">
+      <div class="eyebrow">Good words from hungry people</div>
+      <h2>What people are saying</h2>
+      <div class="review-grid">
+        <article class="review">
+          <div class="stars">★★★★★</div>
+          <p>“The burger was fresh and the fries were perfectly crispy. Ordering was super easy.”</p>
+          <strong>— Aanya R.</strong>
+        </article>
+        <article class="review">
+          <div class="stars">★★★★★</div>
+          <p>“Loved the menu and the little offer. Definitely ordering again with my friends.”</p>
+          <strong>— Kiran M.</strong>
+        </article>
+        <article class="review">
+          <div class="stars">★★★★☆</div>
+          <p>“Great dessert options and a clean website. The chocolate brownie is a favourite.”</p>
+          <strong>— Dev S.</strong>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="brand">Crave<span>Corner.</span></div>
+        <p>Good food. Good mood. Every time.</p>
+      </div>
+      <div class="footer-note">Student project demo · Menu and reviews are sample content</div>
+    </div>
+  </footer>
+
+  <div class="overlay" id="overlay"></div>
+  <aside class="cart-panel" id="cartPanel" aria-label="Shopping cart">
+    <div class="cart-head">
+      <h2>Your Cart</h2>
+      <button class="close-cart" id="closeCart" aria-label="Close cart">×</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-total">
+      <div class="total-row"><span>Total</span><span id="cartTotal">₹0</span></div>
+      <button class="checkout-button" id="checkoutButton">Place demo order</button>
+      <div class="checkout-message" id="checkoutMessage"></div>
+    </div>
+  </aside>
+
+  <script>
+    const menuItems = [
+      { id: 1, name: "Classic Smash Burger", category: "Burgers", price: 189, description: "Juicy patty, cheese, and house sauce.", visual: "visual-peach", symbol: "B" },
+      { id: 2, name: "Crispy Chicken Burger", category: "Burgers", price: 209, description: "Crunchy chicken with fresh lettuce.", visual: "visual-yellow", symbol: "C" },
+      { id: 3, name: "Margherita Pizza", category: "Pizza", price: 249, description: "Cheese, tomato, and a little basil.", visual: "visual-green", symbol: "P" },
+      { id: 4, name: "Farmhouse Pizza", category: "Pizza", price: 299, description: "Loaded with colourful vegetables.", visual: "visual-pink", symbol: "F" },
+      { id: 5, name: "Loaded Fries", category: "Sides", price: 129, description: "Golden fries with cheesy topping.", visual: "visual-yellow", symbol: "F" },
+      { id: 6, name: "Garlic Bread", category: "Sides", price: 99, description: "Toasty bread with garlic butter.", visual: "visual-peach", symbol: "G" },
+      { id: 7, name: "Chocolate Brownie", category: "Desserts", price: 149, description: "Rich chocolate with a soft centre.", visual: "visual-purple", symbol: "B" },
+      { id: 8, name: "Strawberry Sundae", category: "Desserts", price: 159, description: "Creamy scoop with strawberry sauce.", visual: "visual-pink", symbol: "S" },
+      { id: 9, name: "Cold Coffee", category: "Drinks", price: 119, description: "Chilled coffee with a creamy finish.", visual: "visual-blue", symbol: "C" },
+      { id: 10, name: "Lemon Iced Tea", category: "Drinks", price: 89, description: "A refreshing, lightly sweet drink.", visual: "visual-green", symbol: "L" },
+      { id: 11, name: "Veggie Burger", category: "Burgers", price: 169, description: "A crispy veggie patty with fresh greens.", visual: "visual-green", symbol: "V" },
+      { id: 12, name: "Cheese Garlic Pizza", category: "Pizza", price: 279, description: "Extra cheese with garlic seasoning.", visual: "visual-purple", symbol: "C" }
+    ];
+
+    let selectedCategory = "All";
+    let cart = [];
+
+    const menuGrid = document.getElementById("menuGrid");
+    const searchInput = document.getElementById("searchInput");
+    const cartCount = document.getElementById("cartCount");
+    const cartPanel = document.getElementById("cartPanel");
+    const overlay = document.getElementById("overlay");
+    const cartItems = document.getElementById("cartItems");
+    const cartTotal = document.getElementById("cartTotal");
+    const checkoutMessage = document.getElementById("checkoutMessage");
+
+    function renderMenu() {
+      const searchTerm = searchInput.value.trim().toLowerCase();
+      const filteredItems = menuItems.filter(item => {
+        const matchesCategory = selectedCategory === "All" || item.category === selectedCategory;
+        const matchesSearch = item.name.toLowerCase().includes(searchTerm) ||
+          item.category.toLowerCase().includes(searchTerm);
+        return matchesCategory && matchesSearch;
+      });
+
+      if (filteredItems.length === 0) {
+        menuGrid.innerHTML = '<div class="empty-state">No menu items found. Try another search.</div>';
+        return;
+      }
+
+      menuGrid.innerHTML = filteredItems.map(item => `
+        <article class="food-card">
+          <div class="food-visual ${item.visual}">
+            <span>${item.symbol}</span>
+          </div>
+          <div class="food-info">
+            <h3>${item.name}</h3>
+            <p>${item.description}</p>
+            <div class="food-bottom">
+              <span class="price">₹${item.price}</span>
+              <button class="add-btn" onclick="addToCart(${item.id})">Add to cart</button>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function addToCart(id) {
+      const item = menuItems.find(product => product.id === id);
+      const cartItem = cart.find(product => product.id === id);
+
+      if (cartItem) {
+        cartItem.quantity += 1;
+      } else {
+        cart.push({ ...item, quantity: 1 });
+      }
+
+      checkoutMessage.textContent = "";
+      renderCart();
+    }
+
+    function changeQuantity(id, amount) {
+      const item = cart.find(product => product.id === id);
+      if (!item) return;
+
+      item.quantity += amount;
+      if (item.quantity <= 0) {
+        cart = cart.filter(product => product.id !== id);
+      }
+
+      renderCart();
+    }
+
+    function renderCart() {
+      const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+      cartCount.textContent = totalQuantity;
+      cartTotal.textContent = "₹" + totalPrice;
+
+      if (cart.length === 0) {
+        cartItems.innerHTML = '<p style="color:#77717d;padding:20px 0;">Your cart is empty. Add something tasty from the menu.</p>';
+        return;
+      }
+
+      cartItems.innerHTML = cart.map(item => `
+        <div class="cart-item">
+          <div>
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-sub">₹${item.price} each</div>
+            <div class="quantity-controls">
+              <button onclick="changeQuantity(${item.id}, -1)" aria-label="Decrease quantity">−</button>
+              <span>${item.quantity}</span>
+              <button onclick="changeQuantity(${item.id}, 1)" aria-label="Increase quantity">+</button>
+            </div>
+          </div>
+          <strong>₹${item.price * item.quantity}</strong>
+        </div>
+      `).join("");
+    }
+
+    function openCart() {
+      cartPanel.classList.add("open");
+      overlay.classList.add("show");
+    }
+
+    function closeCart() {
+      cartPanel.classList.remove("open");
+      overlay.classList.remove("show");
+    }
+
+    document.getElementById("filters").addEventListener("click", event => {
+      const button = event.target.closest(".filter-btn");
+      if (!button) return;
+
+      selectedCategory = button.dataset.category;
+      document.querySelectorAll(".filter-btn").forEach(filter => filter.classList.remove("active"));
+      button.classList.add("active");
+      renderMenu();
+    });
+
+    searchInput.addEventListener("input", renderMenu);
+    document.getElementById("openCart").addEventListener("click", openCart);
+    document.getElementById("closeCart").addEventListener("click", closeCart);
+    overlay.addEventListener("click", closeCart);
+
+    document.getElementById("checkoutButton").addEventListener("click", () => {
+      if (cart.length === 0) {
+        checkoutMessage.textContent = "Add an item before placing your demo order.";
+        return;
+      }
+
+      checkoutMessage.textContent = "Demo order placed! No payment was collected.";
+      cart = [];
+      renderCart();
+    });
+
+    renderMenu();
+    renderCart();
+  </script>
+</body>
+</html>

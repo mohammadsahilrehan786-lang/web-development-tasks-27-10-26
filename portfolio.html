@@ -1,0 +1,727 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammad Rehan | Portfolio</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #ffffff;
+            color: #172554;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+
+        header {
+            background: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #e5eaf2;
+        }
+
+        nav {
+            min-height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .logo span {
+            color: #1677ff;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            color: #475569;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #1677ff;
+        }
+
+        .resume-btn {
+            background: #1677ff;
+            color: white;
+            padding: 10px 17px;
+            border-radius: 25px;
+            font-size: 13px;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+
+        .hero {
+            background: linear-gradient(120deg, #f0f7ff, #ffffff);
+            padding: 65px 0;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .hero-text .hello {
+            color: #1677ff;
+            font-size: 17px;
+            margin-bottom: 10px;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(32px, 5vw, 48px);
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .hero-text h1 span {
+            color: #1677ff;
+        }
+
+        .hero-text h3 {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .college {
+            color: #475569;
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+        .intro {
+            color: #64748b;
+            max-width: 520px;
+            margin-bottom: 22px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .social-links a {
+            color: #1677ff;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .primary-btn {
+            display: inline-block;
+            background: #1677ff;
+            color: white;
+            padding: 12px 23px;
+            border-radius: 30px;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .primary-btn:hover {
+            background: #075fd1;
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-placeholder {
+            width: 270px;
+            height: 300px;
+            background: linear-gradient(145deg, #dbeafe, #eff6ff);
+            border: 2px solid #bfdbfe;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #2563eb;
+            font-size: 16px;
+            padding: 20px;
+            transform: rotate(2deg);
+            transition: transform 0.4s;
+        }
+
+        .profile-placeholder:hover {
+            transform: rotate(0deg) scale(1.03);
+        }
+
+
+        section {
+            padding: 50px 0;
+            scroll-margin-top: 70px;
+        }
+
+        .section-title {
+            font-size: 25px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title::before {
+            content: "";
+            width: 5px;
+            height: 27px;
+            background: #1677ff;
+            border-radius: 5px;
+        }
+
+        .about-skills {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 45px;
+        }
+
+        .about-text {
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        .quote {
+            margin-top: 20px;
+            background: #eff6ff;
+            padding: 15px;
+            border-radius: 8px;
+            color: #2563eb;
+            font-style: italic;
+        }
+
+
+        .skill {
+            margin-bottom: 20px;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 9px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: #1677ff;
+            border-radius: 10px;
+            animation: grow 1.3s ease forwards;
+        }
+
+        @keyframes grow {
+            from {
+                width: 0;
+            }
+        }
+
+
+        .education-projects {
+            display: grid;
+            grid-template-columns: 0.9fr 1.5fr;
+            gap: 30px;
+            border-top: 1px solid #e5eaf2;
+            padding-top: 35px;
+        }
+
+        .education-card,
+        .project-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            background: #ffffff;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .education-card:hover,
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px #dbeafe;
+        }
+
+        .education-card h3,
+        .project-card h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .education-card p,
+        .project-card p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .project-card a {
+            display: inline-block;
+            margin-top: 15px;
+            color: #1677ff;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+
+        .bottom-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding-top: 25px;
+        }
+
+        .achievement-list {
+            list-style: none;
+            background: #f0f7ff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .achievement-list li {
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #475569;
+        }
+
+        .achievement-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .hobby-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: #f0f7ff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .cricket-icon {
+            font-size: 45px;
+        }
+
+        .hobby-card p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+
+        .contact {
+            background: #f0f7ff;
+            text-align: center;
+        }
+
+        .contact p {
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+
+        .contact-email {
+            display: inline-block;
+            color: #1677ff;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+
+        footer {
+            padding: 22px 0;
+            text-align: center;
+            font-size: 13px;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+        }
+
+
+        @media (max-width: 900px) {
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+            .hero-content {
+                gap: 20px;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+            nav {
+                flex-wrap: wrap;
+                padding: 15px 0;
+            }
+
+            .nav-links {
+                order: 3;
+                width: 100%;
+                overflow-x: auto;
+                padding: 10px 0;
+            }
+
+            .hero-content,
+            .about-skills,
+            .education-projects,
+            .bottom-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 40px 0;
+            }
+
+            .hero-image {
+                min-height: 220px;
+            }
+
+            .profile-placeholder {
+                width: 220px;
+                height: 230px;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 35px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav class="container">
+            <a href="#home" class="logo">
+                MOHAMMAD <span>REHAN</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#hobbies">Hobbies</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+            <button class="resume-btn" onclick="downloadResume()">
+                Download Resume
+            </button>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container hero-content">
+
+            <div class="hero-text">
+                <p class="hello">Hello, I'm</p>
+
+                <h1>MOHAMMAD <span>REHAN</span></h1>
+
+                <h3>B.Tech | CSE Core | 1st Year</h3>
+
+                <p class="college">
+                    NRI Deemed to be University, Agiripalli
+                </p>
+
+                <p class="intro">
+                    I'm a passionate and curious learner, exploring the world
+                    of technology and building my skills in web development
+                    and programming. Welcome to my portfolio!
+                </p>
+
+                <div class="social-links">
+                    <a href="#contact">GitHub</a>
+                    <a href="#contact">LinkedIn</a>
+                    <a href="#contact">Email</a>
+                </div>
+
+                <a href="#projects" class="primary-btn">
+                    View Projects →
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container about-skills">
+
+            <div>
+                <h2 class="section-title">About Me</h2>
+
+                <p class="about-text">
+                    I'm Mohammad Rehan, a first-year B.Tech student in
+                    Computer Science and Engineering at NRI Deemed to be
+                    University, Agiripalli. I have an interest in technology,
+                    problem-solving, and web development. I enjoy learning
+                    new things and building simple projects to improve
+                    my skills. My goal is to become a skilled developer
+                    and contribute to innovative solutions in the future.
+                </p>
+
+                <div class="quote">
+                    "Small steps every day lead to big results."
+                </div>
+            </div>
+
+            <div id="skills">
+                <h2 class="section-title">Skills</h2>
+
+                <div class="skill">
+                    <div class="skill-info">
+                        <span>HTML</span>
+                        <span>Beginner</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%"></div>
+                    </div>
+                </div>
+
+                <div class="skill">
+                    <div class="skill-info">
+                        <span>CSS</span>
+                        <span>Beginner</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 70%"></div>
+                    </div>
+                </div>
+
+                <div class="skill">
+                    <div class="skill-info">
+                        <span>Python</span>
+                        <span>Beginner</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 60%"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section>
+        <div class="container education-projects">
+
+            <div id="education">
+                <h2 class="section-title">Education</h2>
+
+                <div class="education-card">
+                    <h3>NRI Deemed to be University</h3>
+                    <p>B.Tech – Computer Science and Engineering (CSE Core)</p>
+                    <p>2025 – 2029 | 1st Year</p>
+                    <p>Agiripalli, Andhra Pradesh</p>
+                </div>
+            </div>
+
+            <div id="projects">
+                <h2 class="section-title">Projects</h2>
+
+                <div class="project-grid">
+
+                    <div class="project-card">
+                        <h3>Personal Portfolio Website</h3>
+                        <p>
+                            A responsive personal portfolio built using
+                            HTML and CSS to showcase my profile and skills.
+                        </p>
+                        <a href="#home">View Project →</a>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>Student Grade Calculator</h3>
+                        <p>
+                            A beginner Python program that calculates
+                            student grades based on marks.
+                        </p>
+                        <a href="#projects">View Project →</a>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>Responsive Landing Page</h3>
+                        <p>
+                            A modern landing page built using HTML and CSS
+                            with a mobile-friendly layout.
+                        </p>
+                        <a href="#projects">View Project →</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section>
+        <div class="container bottom-grid">
+
+            <div id="achievements">
+                <h2 class="section-title">Achievements</h2>
+
+                <ul class="achievement-list">
+                    <li>✓ Learning Python programming</li>
+                    <li>✓ Exploring web development</li>
+                    <li>✓ Building beginner projects</li>
+                </ul>
+            </div>
+
+            <div id="hobbies">
+                <h2 class="section-title">Hobbies</h2>
+
+                <div class="hobby-card">
+                    <div class="cricket-icon">🏏</div>
+
+                    <div>
+                        <h3>Playing Cricket</h3>
+                        <p>
+                            I enjoy playing cricket. It helps me stay active,
+                            develop teamwork, and enjoy my free time.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title" style="justify-content: center;">
+                Contact Me
+            </h2>
+
+            <p>
+                Feel free to connect with me for projects,
+                collaboration, or learning opportunities.
+            </p>
+
+            <a href="mailto:mohammadrehan@example.com" class="contact-email">
+                mohammadrehan@example.com
+            </a>
+
+            <br>
+
+            <a href="#home" class="primary-btn">
+                Back to Top ↑
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>
+                © 2026 Mohammad Rehan. All rights reserved.
+            </p>
+            <p>
+                B.Tech | CSE Core | 1st Year
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function downloadResume() {
+            const resumeText = `
+MOHAMMAD REHAN
+
+B.Tech | CSE Core | 1st Year
+NRI Deemed to be University, Agiripalli
+
+SKILLS
+HTML
+CSS
+Python
+
+PROJECTS
+Personal Portfolio Website
+Student Grade Calculator
+Responsive Landing Page
+
+HOBBIES
+Playing Cricket
+            `;
+
+            const file = new Blob([resumeText], {
+                type: "text/plain"
+            });
+
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(file);
+            link.download = "Mohammad_Rehan_Resume.txt";
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            URL.revokeObjectURL(link.href);
+        }
+    </script>
+
+</body>
+</html>
